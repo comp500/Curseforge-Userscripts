@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.4
+// @version      0.6
 // @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab
 // @author       comp500
+// @namespace    https://infra.link/
 // @match        https://www.curseforge.com/*
-// @updateURL    https://gist.githubusercontent.com/comp500/02d141a5b573aa80cff7e87989884bf5/raw/cfqol.user.js
-// @downloadURL  https://gist.githubusercontent.com/comp500/02d141a5b573aa80cff7e87989884bf5/raw/cfqol.user.js
+// @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
+// @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==

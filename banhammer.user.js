@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         No More MCreator Mods
-// @version      0.5
+// @version      0.7
 // @description  you weren't gonna use them anyway
 // @author       comp500
+// @namespace    https://infra.link/
 // @match        https://www.curseforge.com/minecraft/*
 // @connect      addons-ecs.forgesvc.net
 // @connect      edge.forgecdn.net
@@ -10,8 +11,8 @@
 // @grant        GM_xmlhttpRequest
 // @require      https://unpkg.com/jszip@3.2.2/dist/jszip.min.js
 // @run-at       document-end
-// @updateURL    https://gist.githubusercontent.com/comp500/8795c6b295ccfe7ba59c104ff48d804e/raw/banhammer.user.js
-// @downloadURL  https://gist.githubusercontent.com/comp500/8795c6b295ccfe7ba59c104ff48d804e/raw/banhammer.user.js
+// @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
+// @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
 // ==/UserScript==
 
 (function() {
