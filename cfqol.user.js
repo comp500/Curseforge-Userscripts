@@ -1,0 +1,58 @@
+// ==UserScript==
+// @name         Curseforge QOL Fixes
+// @version      0.4
+// @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab
+// @author       comp500
+// @match        https://www.curseforge.com/*
+// @updateURL    https://gist.githubusercontent.com/comp500/02d141a5b573aa80cff7e87989884bf5/raw/cfqol.user.js
+// @downloadURL  https://gist.githubusercontent.com/comp500/02d141a5b573aa80cff7e87989884bf5/raw/cfqol.user.js
+// @grant        none
+// @run-at       document-end
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Change the Browse link and the default Minecraft tab (from other links) to /minecraft/mc-mods
+    let regexBrowse = /^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/;
+    Array.from(document.getElementsByTagName("a")).filter(a => regexBrowse.test(a.href)).forEach(a => {a.href = "https://www.curseforge.com/minecraft/mc-mods"});
+
+    // Add a search box
+    let searchBoxContainer = document.createElement("div");
+    searchBoxContainer.className = "flex mr-4 items-center";
+    searchBoxContainer.innerHTML = `<form action="/minecraft/mc-mods/search" method="get" novalidate="novalidate" autocomplete="false">
+    <div class="flex flex-col h-full justify-between">
+         <div class="input input--icon" style="color: #000">
+            <i class="search textgray-900 flex items-center justify-center">
+                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/2-0-7166-24694/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
+            </i>
+            <input type="text" name="search" id="6" placeholder="Search Mods">
+        </div>
+    </div></form>`;
+    let insertLocation = document.querySelector(".private-message");
+    if (insertLocation != null) {
+        // @Inject(method = "the navbar", at = @At("HEAD"))
+        insertLocation.parentNode.insertBefore(searchBoxContainer, insertLocation);
+    }
+
+    // Add an "All Files" tab
+    let pathMatches = /\/minecraft\/mc-mods\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+    let files = document.getElementById("nav-files");
+    if (pathMatches != null && pathMatches.length == 2 && files != null) {
+        let slug = pathMatches[1];
+        let allFiles = document.createElement("li");
+        let isAllFilesPage = /\/minecraft\/mc-mods\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(document.location.pathname);
+        if (isAllFilesPage) {
+            allFiles.className = "border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+            files.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+        } else {
+            allFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+        }
+        allFiles.innerHTML = `<a href="/minecraft/mc-mods/${slug}/files/all" class="text-${isAllFilesPage ? "primary" : "gray"}-500 hover:no-underline">
+            <span class="b-list-label">
+                All Files
+            </span>
+        </a>`;
+        files.parentNode.insertBefore(allFiles, files.nextSibling);
+    }
+})();
