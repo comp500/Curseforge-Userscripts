@@ -31,6 +31,6 @@ This userscript fixes a few annoying problems I had with Curseforge. It does the
 	![All Files tab](images/allfiles.png)
 
 ## No More MCreator Mods
-This userscript attempt to determine which mods are MCreator mods on the Curseforge site, and hide them! It may cause excessive bandwidth usage (it often downloads the actual mod to check if is a MCreator mod) and is more of an experiment than an actual userscript.
+This userscript attempts to determine which mods are MCreator mods on the Curseforge site, and hide them! It may cause excessive bandwidth usage (it often downloads the actual mod to check if is a MCreator mod) and is more of an experiment than an actual userscript.
 
 ![🦀🦀🦀 FORTCRAFT IS GONE 🦀🦀🦀](images/fortcraft.png)
