@@ -7,8 +7,11 @@
 // @match        https://www.curseforge.com/*
 // @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
 // @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
-// @grant        none
+// @homepageURL  https://github.com/comp500/Curseforge-Userscripts/
+// @supportURL   https://github.com/comp500/Curseforge-Userscripts/issues/
+// @source       https://github.com/comp500/Curseforge-Userscripts/
 // @run-at       document-end
+// @grant        none
 // ==/UserScript==
 
 (function() {

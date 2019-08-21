@@ -5,14 +5,17 @@
 // @author       comp500
 // @namespace    https://infra.link/
 // @match        https://www.curseforge.com/minecraft/*
+// @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
+// @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
+// @homepageURL  https://github.com/comp500/Curseforge-Userscripts/
+// @supportURL   https://github.com/comp500/Curseforge-Userscripts/issues/
+// @source       https://github.com/comp500/Curseforge-Userscripts/
+// @run-at       document-end
+// @grant        GM_xmlhttpRequest
 // @connect      addons-ecs.forgesvc.net
 // @connect      edge.forgecdn.net
 // @connect      media.forgecdn.net
-// @grant        GM_xmlhttpRequest
 // @require      https://unpkg.com/jszip@3.2.2/dist/jszip.min.js
-// @run-at       document-end
-// @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
-// @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js
 // ==/UserScript==
 
 (function() {
