@@ -1,4 +1,4 @@
-# Curseforge-Userscripts
+# Curseforge Userscripts
 Some useful userscripts for curseforge.com. Feel free to PR or create issues for features you want added. They work well with [Curse Dark by its_meow](https://itsmeow.dev/cursedark/).
 
 ## Install
