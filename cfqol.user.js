@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.6
+// @version      0.7
 // @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab
 // @author       comp500
 // @namespace    https://infra.link/
@@ -28,7 +28,7 @@
     <div class="flex flex-col h-full justify-between">
          <div class="input input--icon" style="color: #000">
             <i class="search textgray-900 flex items-center justify-center">
-                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/2-0-7166-24694/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
+                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/2-0-7173-27581/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
             </i>
             <input type="text" name="search" id="6" placeholder="Search Mods">
         </div>
