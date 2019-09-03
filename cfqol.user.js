@@ -24,11 +24,14 @@
     // Add a search box
     let searchBoxContainer = document.createElement("div");
     searchBoxContainer.className = "flex mr-4 items-center";
-    searchBoxContainer.innerHTML = `<form action="/minecraft/mc-mods/search" method="get" novalidate="novalidate" autocomplete="false">
+	// Get the current assets path
+	let styleSheet = Array.from(document.styleSheets).find(s => /\/Content\//.test(s.href));
+	let assetsPath = styleSheet == null ? "2-0-7179-35052" : /\/Content\/([\d\-]+)\//.exec(styleSheet.href)[1];
+    searchBoxContainer.innerHTML = `<form action="/minecraft/mc-mods/search" method="get" novalidate="novalidate" autocomplete="false" style="width:100%">
     <div class="flex flex-col h-full justify-between">
          <div class="input input--icon" style="color: #000">
             <i class="search textgray-900 flex items-center justify-center">
-                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/2-0-7173-27581/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
+                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
             </i>
             <input type="text" name="search" id="6" placeholder="Search Mods">
         </div>
