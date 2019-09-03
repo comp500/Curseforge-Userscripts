@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.7
+// @version      0.8
 // @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab
 // @author       comp500
 // @namespace    https://infra.link/
@@ -33,14 +33,46 @@
             <i class="search textgray-900 flex items-center justify-center">
                 <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
             </i>
-            <input type="text" name="search" id="6" placeholder="Search Mods">
+            <input type="text" name="search" id="cfqolTopbarSearch" placeholder="Search Mods">
         </div>
     </div></form>`;
     let insertLocation = document.querySelector(".private-message");
     if (insertLocation != null) {
         // @Inject(method = "the navbar", at = @At("HEAD"))
         insertLocation.parentNode.insertBefore(searchBoxContainer, insertLocation);
-    }
+	}
+
+	// Make the search box magically grow
+    let searchBox = searchBoxContainer.querySelector("#cfqolTopbarSearch");
+	if (searchBox != null) {
+		// Fix stupid flexboxes - set to flex-grow 1 flex-shrink 0
+		searchBoxContainer.style.flex = "1 0";
+		searchBoxContainer.parentNode.parentNode.style.flex = "1 0";
+
+		let navLinksContainer = document.querySelector(".top-nav__nav-link").parentNode;
+		navLinksContainer.style.transition = "opacity 0.4s, max-width 0.3s";
+		navLinksContainer.style.overflowX = "hidden";
+		searchBox.style.transition = "";
+		searchBox.addEventListener("focus", e => {
+			navLinksContainer.style.opacity = 0;
+			navLinksContainer.style.maxWidth = "0";
+		});
+		searchBox.addEventListener("blur", e => {
+			navLinksContainer.style.opacity = 1;
+			navLinksContainer.style.maxWidth = "2000px";
+		});
+		// Make the search icon focus the search box
+		let searchIcon = searchBoxContainer.querySelector(".search");
+		if (searchIcon != null) {
+			searchIcon.addEventListener("click", e => {
+				searchBox.focus();
+			});
+		}
+	}
+
+	// Hide useless links, to save space
+	let uselessLinks = ["Minecraft Forums"];
+	Array.from(document.querySelectorAll(".top-nav__nav-link")).filter(n => uselessLinks.includes(n.innerText)).forEach(n => n.parentNode.removeChild(n));
 
     // Add an "All Files" tab
     let pathMatches = /\/minecraft\/mc-mods\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
