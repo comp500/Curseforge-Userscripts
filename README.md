@@ -12,8 +12,9 @@ To install these userscripts, you will need a supported userscript manager for y
 
 Once you have installed a userscript manager, click the following links to install userscripts from this repository:
 
-- [No More MCreator Mods](https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js)
 - [Curseforge Quality Of Life Fixes](https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js)
+- [No More MCreator Mods](https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js)
+- [No More ARR Mods](https://github.com/comp500/Curseforge-Userscripts/raw/master/oss.user.js)
 
 They can also be installed from [Greasy Fork](https://greasyfork.org/en/users/331451-comp500).
 
@@ -34,3 +35,6 @@ This userscript fixes a few annoying problems I had with Curseforge. It does the
 This userscript attempts to determine which mods are MCreator mods on the Curseforge site, and hide them! It may cause excessive bandwidth usage (it often downloads the actual mod to check if is a MCreator mod) and is more of an experiment than an actual userscript.
 
 ![🦀🦀🦀 FORTCRAFT IS GONE 🦀🦀🦀](images/fortcraft.png)
+
+## No More ARR Mods
+This is a variant of No More MCreator Mods, but excluding all mods without a Source link. This has the benefit of being much faster than the above, and also excluding evil closed source mods!
