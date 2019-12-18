@@ -21,7 +21,7 @@ They can also be installed from [Greasy Fork](https://greasyfork.org/en/users/33
 ## Curseforge Quality Of Life Fixes
 This userscript fixes a few annoying problems I had with Curseforge. It does the following:
 
-- Adds a search bar to the top navigation bar that searches mods
+- Adds a search bar to the top navigation bar that searches mods (and removes the Minecraft Forums link to make space)
 
 	![Search bar](images/searchbar.png)
 - Changes the default action of the "Browse" link (in the top navigation bar) and the Minecraft logo on that page to the Mods tab of Minecraft
@@ -30,11 +30,14 @@ This userscript fixes a few annoying problems I had with Curseforge. It does the
 - Adds a tab to mod pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
 
 	![All Files tab](images/allfiles.png)
+- Adds pagination for dependency lists to the bottom of the page, so you don't have to scroll up!
+
+	![Pagination](images/pagination.png)
 
 ## No More MCreator Mods
 This userscript attempts to determine which mods are MCreator mods on the Curseforge site, and hide them! It may cause excessive bandwidth usage (it often downloads the actual mod to check if is a MCreator mod) and is more of an experiment than an actual userscript.
 
 ![🦀🦀🦀 FORTCRAFT IS GONE 🦀🦀🦀](images/fortcraft.png)
 
-## No More ARR Mods
-This is a variant of No More MCreator Mods, but excluding all mods without a Source link. This has the benefit of being much faster than the above, and also excluding evil closed source mods!
+## No More ARR (All Rights Reserved) Mods
+This is a variant of No More MCreator Mods, but excluding all mods without a Source link. This has the benefit of being much faster than the above, and also excluding evil closed source mods! (Although some people forget to put a Source link on their mod so....)
