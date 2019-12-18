@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.9
+// @version      0.10
 // @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab, add pagination to the bottom
 // @author       comp500
 // @namespace    https://infra.link/
@@ -109,7 +109,9 @@
 	// Add pagination to the bottom of the page in dependency lists
 	let dependenciesPage = document.querySelector(".project-dependencies-page > div");
 	if (dependenciesPage != null) {
-		let paginationTop = document.querySelector(".project-dependencies-page > div .pagination-top").parentNode;
-		dependenciesPage.appendChild(paginationTop.cloneNode(true)).classList.remove("mb-4");
+		let paginationTop = document.querySelector(".project-dependencies-page > div .pagination-top");
+		if (paginationTop != null) {
+			dependenciesPage.appendChild(paginationTop.parentNode.cloneNode(true)).classList.remove("mb-4");
+		}
 	}
 })();
