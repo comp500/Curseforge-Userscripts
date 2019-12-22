@@ -15,6 +15,7 @@ Once you have installed a userscript manager, click the following links to insta
 - [Curseforge Quality Of Life Fixes](https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js)
 - [No More MCreator Mods](https://github.com/comp500/Curseforge-Userscripts/raw/master/banhammer.user.js)
 - [No More ARR Mods](https://github.com/comp500/Curseforge-Userscripts/raw/master/oss.user.js)
+- [Redirect Old Links](https://github.com/comp500/Curseforge-Userscripts/raw/master/redir.user.js)
 
 They can also be installed from [Greasy Fork](https://greasyfork.org/en/users/331451-comp500).
 
@@ -41,3 +42,8 @@ This userscript attempts to determine which mods are MCreator mods on the Cursef
 
 ## No More ARR (All Rights Reserved) Mods
 This is a variant of No More MCreator Mods, but excluding all mods without a Source link. This has the benefit of being much faster than the above, and also excluding evil closed source mods! (Although some people forget to put a Source link on their mod so....)
+
+## Redirect Old Links
+When Curseforge redesigned their site, they moved mods from minecraft.curseforge.com to www.curseforge.com/minecraft. It doesn't seem to redirect the old links to the new ones any more, so this userscript will do it for you. For some reason the new site also doesn't support viewing mods by Addon ID anymore, so this script will resolve the IDs if they exist in the old links.
+
+![Module disabled??!!](images/moduleundisabled.png)
