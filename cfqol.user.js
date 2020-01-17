@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.10
+// @version      0.11
 // @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab, add pagination to the bottom
 // @author       comp500
 // @namespace    https://infra.link/
@@ -29,7 +29,7 @@
 	let searchBoxContainer = document.createElement("div");
 	searchBoxContainer.className = "flex mr-4 items-center";
 	// Get the current assets path
-	let styleSheet = Array.from(document.styleSheets).find(s => /\/Content\//.test(s.href));
+	let styleSheet = Array.from(document.styleSheets).find(s => /\/Content\/([\d\-]+)\//.test(s.href));
 	let assetsPath = styleSheet == null ? "2-0-7179-35052" : /\/Content\/([\d\-]+)\//.exec(styleSheet.href)[1];
 	searchBoxContainer.innerHTML = `<form action="/minecraft/mc-mods/search" method="get" novalidate="novalidate" autocomplete="false" style="width:100%">
     <div class="flex flex-col h-full justify-between">
@@ -40,37 +40,37 @@
             <input type="text" name="search" id="cfqolTopbarSearch" placeholder="Search Mods">
         </div>
     </div></form>`;
-	let insertLocation = document.querySelector(".private-message");
-	if (insertLocation != null) {
+	let insertLocation = document.querySelector(".curseforge-header .ml-auto > div");
+	if (insertLocation != null && insertLocation.firstChild != null) {
 		// @Inject(method = "the navbar", at = @At("HEAD"))
-		insertLocation.parentNode.insertBefore(searchBoxContainer, insertLocation);
-	}
+		insertLocation.insertBefore(searchBoxContainer, insertLocation.firstChild);
 
-	// Make the search box magically grow
-	let searchBox = searchBoxContainer.querySelector("#cfqolTopbarSearch");
-	if (searchBox != null) {
-		// Fix stupid flexboxes - set to flex-grow 1 flex-shrink 0
-		searchBoxContainer.style.flex = "1 0";
-		searchBoxContainer.parentNode.parentNode.style.flex = "1 0";
+		// Make the search box magically grow
+		let searchBox = searchBoxContainer.querySelector("#cfqolTopbarSearch");
+		if (searchBox != null) {
+			// Fix stupid flexboxes - set to flex-grow 1 flex-shrink 0
+			searchBoxContainer.style.flex = "1 0";
+			searchBoxContainer.parentNode.parentNode.style.flex = "1 0";
 
-		let navLinksContainer = document.querySelector(".top-nav__nav-link").parentNode;
-		navLinksContainer.style.transition = "opacity 0.4s, max-width 0.3s";
-		navLinksContainer.style.overflowX = "hidden";
-		searchBox.style.transition = "";
-		searchBox.addEventListener("focus", e => {
-			navLinksContainer.style.opacity = 0;
-			navLinksContainer.style.maxWidth = "0";
-		});
-		searchBox.addEventListener("blur", e => {
-			navLinksContainer.style.opacity = 1;
-			navLinksContainer.style.maxWidth = "2000px";
-		});
-		// Make the search icon focus the search box
-		let searchIcon = searchBoxContainer.querySelector(".search");
-		if (searchIcon != null) {
-			searchIcon.addEventListener("click", e => {
-				searchBox.focus();
+			let navLinksContainer = document.querySelector(".top-nav__nav-link").parentNode;
+			navLinksContainer.style.transition = "opacity 0.4s, max-width 0.3s";
+			navLinksContainer.style.overflowX = "hidden";
+			searchBox.style.transition = "";
+			searchBox.addEventListener("focus", e => {
+				navLinksContainer.style.opacity = 0;
+				navLinksContainer.style.maxWidth = "0";
 			});
+			searchBox.addEventListener("blur", e => {
+				navLinksContainer.style.opacity = 1;
+				navLinksContainer.style.maxWidth = "2000px";
+			});
+			// Make the search icon focus the search box
+			let searchIcon = searchBoxContainer.querySelector(".search");
+			if (searchIcon != null) {
+				searchIcon.addEventListener("click", e => {
+					searchBox.focus();
+				});
+			}
 		}
 	}
 
