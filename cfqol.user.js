@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.11
-// @description  Fix Minecraft default tab to search mods, fix browse button to go to /minecraft/mc-mods, add search box in the navbar, add All Files tab, add pagination to the bottom
+// @version      0.12
+// @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
 // @match        https://www.curseforge.com/*
@@ -114,4 +114,96 @@
 			dependenciesPage.appendChild(paginationTop.parentNode.cloneNode(true)).classList.remove("mb-4");
 		}
 	}
+
+	// Skip download countdowns
+	// TODO: use funky service workers?
+	let downloadScript = Array.from(document.scripts).find(s => s.innerText != null && s.innerText.includes("PublicProjectDownload.countdown"));
+	if (downloadScript != null && downloadScript.innerText != null) {
+		let matches = downloadScript.innerText.match(/countdown\("(.+)"\)/);
+		if (matches != null && matches[1] != null) {
+			// Break the existing script
+			let countdownEl = document.querySelector("span[data-countdown-seconds]");
+			if (countdownEl != null) {
+				// UNSAFE if grant != none! For some reason jQuery stores data in itself rather than attrs?!
+				jQuery.removeData(countdownEl, "countdown-seconds");
+			}
+			
+			let downloadText = document.querySelector("p[data-countdown-timer]");
+			if (downloadText != null) {
+				downloadText.innerText = "Downloading now...";
+			}
+			
+			window.location.href = matches[1];
+		}
+	}
+
+	// Readd download buttons for modpacks
+	Array.from(document.querySelectorAll("a.button")).filter(l => 
+		l.pathname.startsWith("/minecraft/modpacks") && l.href.endsWith("?client=y")
+	).map(link => {
+		let newHref = link.href.slice(0, -9);
+
+		if (link.classList.contains("button--icon-only")) {
+			// All Files list
+
+			let newLink = link.cloneNode(true);
+			newLink.href = newHref;
+			newLink.classList.add("button--hollow");
+			newLink.classList.add("mr-2");
+
+			let icon = newLink.querySelector(".icon");
+			if (icon != null) {
+				icon.parentNode.innerHTML = `<svg class="icon icon-fixed-width icon-margin" viewBox="0 0 20 20" width="18" height="18">
+					<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
+				</svg>`;
+			}
+			if (link.parentNode != null) {
+				link.parentNode.insertBefore(newLink, link);
+			}
+		} else if (link.querySelector(".button__text") != null) {
+			// Full text buttons
+
+			let newButton = link.parentNode.cloneNode(true);
+			// "Main file" buttons have ml-2 on the right button, while the rest have px-1 on both
+			if (link.parentNode.classList == null || !link.parentNode.classList.contains("px-1")) {
+				link.parentNode.classList.add("ml-2");
+			}
+			let newLink = newButton.querySelector("a.button");
+			newLink.classList.add("button--hollow");
+			newLink.href = newHref;
+
+			// Buttons at the top of the page have mr-1 on the install icon, and no icon on the Download button
+			let svgEl = newLink.querySelector("svg.mr-1");
+			if (svgEl == null) {
+				newLink.innerHTML = `<span class="button__text">
+					<svg class="icon icon-margin" viewBox="0 0 20 20" width="18" height="18">
+						<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
+					</svg> Download
+				</span>`;
+			} else {
+				svgEl.parentNode.removeChild(svgEl);
+				let newText = newLink.querySelector(".button__text");
+				if (newText != null) {
+					newText.innerText = "Download";
+				}
+			}
+			link.parentNode.parentNode.insertBefore(newButton, link.parentNode);
+		}
+	});
+
+	// Minecraft version-specific files list
+	Array.from(document.querySelectorAll(".cf-recentfiles-credits-wrapper")).filter(
+		w => w.firstChild == null || (w.childNodes.length == 1 && w.firstChild.nodeType != Node.ELEMENT_NODE)
+	).forEach(wrapper => {
+		let link = wrapper.parentNode.querySelector("a");
+
+		if (link != null) {
+			let newHref = link.href.replace("files", "download");
+			wrapper.innerHTML = `<a href="${newHref}" class="button button--icon-only button--sidebar">
+				<span class="button__text">
+					<svg class="icon icon-fixed-width icon-margin" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use></svg>
+				</span>
+			</a>`;
+		}
+	});
 })();
