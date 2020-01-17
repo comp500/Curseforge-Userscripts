@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.12
+// @version      0.13
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -116,7 +116,6 @@
 	}
 
 	// Skip download countdowns
-	// TODO: use funky service workers?
 	let downloadScript = Array.from(document.scripts).find(s => s.innerText != null && s.innerText.includes("PublicProjectDownload.countdown"));
 	if (downloadScript != null && downloadScript.innerText != null) {
 		let matches = downloadScript.innerText.match(/countdown\("(.+)"\)/);
@@ -136,12 +135,22 @@
 			window.location.href = matches[1];
 		}
 	}
+	// Better method for skipping, if links contain file ID already
+	let regexDownloadLink = /^https:\/\/www.curseforge.com\/.*\/download\/\d+$/;
+	Array.from(document.getElementsByTagName("a"))
+		.filter(a => regexDownloadLink.test(a.href))
+		.forEach(a => {
+			a.href = a.href + "/file";
+		});
 
 	// Readd download buttons for modpacks
 	Array.from(document.querySelectorAll("a.button")).filter(l => 
 		l.pathname.startsWith("/minecraft/modpacks") && l.href.endsWith("?client=y")
 	).map(link => {
 		let newHref = link.href.slice(0, -9);
+		if (regexDownloadLink.test(newHref)) {
+			newHref = newHref + "/file";
+		}
 
 		if (link.classList.contains("button--icon-only")) {
 			// All Files list
@@ -199,6 +208,9 @@
 
 		if (link != null) {
 			let newHref = link.href.replace("files", "download");
+			if (regexDownloadLink.test(newHref)) {
+				newHref = newHref + "/file";
+			}
 			wrapper.innerHTML = `<a href="${newHref}" class="button button--icon-only button--sidebar">
 				<span class="button__text">
 					<svg class="icon icon-fixed-width icon-margin" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use></svg>
