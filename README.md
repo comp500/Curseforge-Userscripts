@@ -28,10 +28,10 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 	![Search bar](images/searchbar.png)
 - Readds modpack download buttons, because they removed them. Useful for people using alternative launchers.
 
-	![Modpack download button](modpackdownload.png)
+	![Modpack download button](images/modpackdownload.png)
 - Automatically follows the 5 second redirect for you, so you don't have to wait. Works best with version-specific download buttons.
 
-	![Say No to the Countdown](nocountdown.png)
+	![Say No to the Countdown](images/nocountdown.png)
 - Adds a tab to mod pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
 
 	![All Files tab](images/allfiles.png)
