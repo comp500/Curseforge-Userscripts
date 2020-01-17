@@ -26,21 +26,21 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 - Adds a search bar to the top navigation bar that searches mods (and removes the Minecraft Forums link to make space)
 
 	![Search bar](images/searchbar.png)
-- Changes the default action of the "Browse" link (in the top navigation bar) and the Minecraft logo on that page to the Mods tab of Minecraft
+- Readds modpack download buttons, because they removed them. Useful for people using alternative launchers.
 
-	![Mods tab](images/modstab.png)
+	![Modpack download button](modpackdownload.png)
+- Automatically follows the 5 second redirect for you, so you don't have to wait. Works best with version-specific download buttons.
+
+	![Say No to the Countdown](nocountdown.png)
 - Adds a tab to mod pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
 
 	![All Files tab](images/allfiles.png)
 - Adds pagination for dependency lists to the bottom of the page, so you don't have to scroll up!
 
 	![Pagination](images/pagination.png)
+- Changes the default action of the "Browse" link (in the top navigation bar) and the Minecraft logo on the homepage to the Mods tab of Minecraft
 
-### Upcoming features
-I had these extra ideas, I'm going to add them soon.
-
-- Readds modpack download link to the main modpack page, because they removed it for some reason. Saves you a click!
-- Automatically follows the 5 second redirect for you, so you don't have to wait.
+	![Mods tab](images/modstab.png)
 
 ## Redirect Old Links
 When Curseforge redesigned their site, they moved mods from minecraft.curseforge.com to www.curseforge.com/minecraft. It doesn't seem to redirect the old links to the new ones any more, so this userscript will do it for you. For some reason the new site also doesn't support viewing mods by Addon ID anymore, so this script will resolve the IDs if they exist in the old links.
