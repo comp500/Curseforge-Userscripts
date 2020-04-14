@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.13
+// @version      0.14
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -82,54 +82,53 @@
 
 	// Add an "All Files" tab for mods
 	let modPathMatches = /\/minecraft\/mc-mods\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
-	let modFiles = document.getElementById("nav-files");
-	if (modPathMatches != null && modPathMatches.length == 2 && modFiles != null) {
+	let filesTab = document.getElementById("nav-files");
+	if (modPathMatches != null && modPathMatches.length == 2 && filesTab != null) {
 		let modSlug = modPathMatches[1];
 		let modAllFiles = document.createElement("li");
-		let modIsAllFilesPage = /\/minecraft\/mc-mods\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+		let isAllFilesPage = /\/minecraft\/mc-mods\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
 			document.location.pathname
 		);
-		if (modIsAllFilesPage) {
+		if (isAllFilesPage) {
 			modAllFiles.className =
 				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-			modFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 		} else {
 			modAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 		}
 		modAllFiles.innerHTML = `<a href="/minecraft/mc-mods/${modSlug}/files/all" class="text-${
-			modIsAllFilesPage ? "primary" : "gray"
+			isAllFilesPage ? "primary" : "gray"
 		}-500 hover:no-underline">
             <span class="b-list-label">
                 All Files
             </span>
         </a>`;
-		modFiles.parentNode.insertBefore(modAllFiles, modFiles.nextSibling);
+		filesTab.parentNode.insertBefore(modAllFiles, filesTab.nextSibling);
 	}
 
   // Add an "All Files" tab for modpacks
   let packPathMatches = /\/minecraft\/modpacks\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
-  let packFiles = document.getElementById("nav-files");
-  if (packPathMatches != null && packPathMatches.length == 2 && packFiles != null) {
+  if (packPathMatches != null && packPathMatches.length == 2 && filesTab != null) {
 	  let packSlug = packPathMatches[1];
 	  let packAllFiles = document.createElement("li");
-	  let packIsAllFilesPage = /\/minecraft\/modpacks\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+	  let isAllFilesPage = /\/minecraft\/modpacks\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
 		  document.location.pathname
 	  );
-	  if (packIsAllFilesPage) {
+	  if (isAllFilesPage) {
 		  packAllFiles.className =
 			  "border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-		  packFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		  filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 	  } else {
 		  packAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 	  }
 	  packAllFiles.innerHTML = `<a href="/minecraft/modpacks/${packSlug}/files/all" class="text-${
-		  packIsAllFilesPage ? "primary" : "gray"
+		  isAllFilesPage ? "primary" : "gray"
 	  }-500 hover:no-underline">
 		  <span class="b-list-label">
 			  All Files
 		  </span>
 	  </a>`;
-	  packFiles.parentNode.insertBefore(packAllFiles, packFiles.nextSibling);
+	  filesTab.parentNode.insertBefore(packAllFiles, filesTab.nextSibling);
   }
 
 	// Add pagination to the bottom of the page in dependency lists

@@ -29,7 +29,7 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 - Readds modpack download buttons, because they removed them. Useful for people using alternative launchers.
 
 	![Modpack download button](images/modpackdownload.png)
-- Adds a tab to mod pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
+- Adds a tab to mod and modpack pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
 
 	![All Files tab](images/allfiles.png)
 - Adds pagination for dependency lists to the bottom of the page, so you don't have to scroll up!
