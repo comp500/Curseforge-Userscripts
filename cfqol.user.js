@@ -80,31 +80,57 @@
 		.filter(n => uselessLinks.includes(n.innerText))
 		.forEach(n => n.parentNode.removeChild(n));
 
-	// Add an "All Files" tab
-	let pathMatches = /\/minecraft\/mc-mods\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
-	let files = document.getElementById("nav-files");
-	if (pathMatches != null && pathMatches.length == 2 && files != null) {
-		let slug = pathMatches[1];
-		let allFiles = document.createElement("li");
-		let isAllFilesPage = /\/minecraft\/mc-mods\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+	// Add an "All Files" tab for mods
+	let modPathMatches = /\/minecraft\/mc-mods\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	let modFiles = document.getElementById("nav-files");
+	if (modPathMatches != null && modPathMatches.length == 2 && modFiles != null) {
+		let modSlug = modPathMatches[1];
+		let modAllFiles = document.createElement("li");
+		let modIsAllFilesPage = /\/minecraft\/mc-mods\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
 			document.location.pathname
 		);
-		if (isAllFilesPage) {
-			allFiles.className =
+		if (modIsAllFilesPage) {
+			modAllFiles.className =
 				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-			files.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			modFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 		} else {
-			allFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			modAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 		}
-		allFiles.innerHTML = `<a href="/minecraft/mc-mods/${slug}/files/all" class="text-${
-			isAllFilesPage ? "primary" : "gray"
+		modAllFiles.innerHTML = `<a href="/minecraft/mc-mods/${modSlug}/files/all" class="text-${
+			modIsAllFilesPage ? "primary" : "gray"
 		}-500 hover:no-underline">
             <span class="b-list-label">
                 All Files
             </span>
         </a>`;
-		files.parentNode.insertBefore(allFiles, files.nextSibling);
+		modFiles.parentNode.insertBefore(modAllFiles, modFiles.nextSibling);
 	}
+
+  // Add an "All Files" tab for modpacks
+  let packPathMatches = /\/minecraft\/modpacks\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+  let packFiles = document.getElementById("nav-files");
+  if (packPathMatches != null && packPathMatches.length == 2 && packFiles != null) {
+	  let packSlug = packPathMatches[1];
+	  let packAllFiles = document.createElement("li");
+	  let packIsAllFilesPage = /\/minecraft\/modpacks\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+		  document.location.pathname
+	  );
+	  if (packIsAllFilesPage) {
+		  packAllFiles.className =
+			  "border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		  packFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+	  } else {
+		  packAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+	  }
+	  packAllFiles.innerHTML = `<a href="/minecraft/modpacks/${packSlug}/files/all" class="text-${
+		  packIsAllFilesPage ? "primary" : "gray"
+	  }-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+	  packFiles.parentNode.insertBefore(packAllFiles, packFiles.nextSibling);
+  }
 
 	// Add pagination to the bottom of the page in dependency lists
 	let dependenciesPage = document.querySelector(".project-dependencies-page > div");
