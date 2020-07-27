@@ -36,9 +36,15 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 - Changes the default action of the "Browse" link (in the top navigation bar) and the Minecraft logo on the homepage to the Mods tab of Minecraft
 
 	![Mods tab](images/modstab.png)
-- Automatically follows the 5 second redirect for you, so you don't have to wait. Works best with version-specific download buttons.
+- Automatically follows the 5 second download redirect for you, so you don't have to wait. Works best with version-specific download buttons.
 
 	![Say No to the Countdown](images/nocountdown.png)
+- Automatically follows the "You are about to leave Curseforge" message for you, so you don't have to wait.
+
+    ![Say No to the Countdown 2 electric boogaloo](images/nocountdown2.png)
+- Changes the default user tab to "Projects", because most of the time that's what you actually want to see.
+
+	![Projects tab](images/defaultusertab.png)
 
 ## Redirect Old Links
 When Curseforge redesigned their site, they moved mods from minecraft.curseforge.com to www.curseforge.com/minecraft. It doesn't seem to redirect the old links to the new ones any more, so this userscript will do it for you. For some reason the new site also doesn't support viewing mods by Addon ID anymore, so this script will resolve the IDs if they exist in the old links.
