@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.16
+// @version      0.17
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -16,14 +16,6 @@
 
 (function () {
 	"use strict";
-
-	// Change the Browse link and the default Minecraft tab (from other links) to /minecraft/mc-mods
-	let regexBrowse = /^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/;
-	Array.from(document.getElementsByTagName("a"))
-		.filter((a) => regexBrowse.test(a.href))
-		.forEach((a) => {
-			a.href = "https://www.curseforge.com/minecraft/mc-mods";
-		});
 
 	// Add a search box
 	let searchBoxContainer = document.createElement("div");
@@ -162,12 +154,35 @@
 			window.location.href = matches[1];
 		}
 	}
+	
+	/**
+	 * Link redirections
+	 */
+
+	const linkList = Array.from(document.getElementsByTagName("a"));
+
 	// Better method for skipping, if links contain file ID already
 	let regexDownloadLink = /^https:\/\/www.curseforge.com\/.*\/download\/\d+$/;
-	Array.from(document.getElementsByTagName("a"))
+	linkList
 		.filter((a) => regexDownloadLink.test(a.href))
 		.forEach((a) => {
 			a.href = a.href + "/file";
+		});
+
+	// Change the Browse link and the default Minecraft tab (from other links) to /minecraft/mc-mods
+	let regexBrowse = /^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/;
+	linkList
+		.filter((a) => regexBrowse.test(a.href))
+		.forEach((a) => {
+			a.href = "https://www.curseforge.com/minecraft/mc-mods";
+		});
+	
+	// Change the default member tab to projects
+	let regexMemberLink = /^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/;
+	linkList
+		.filter((a) => regexMemberLink.test(a.href))
+		.forEach((a) => {
+			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
 		});
 
 	// Readd download buttons for modpacks
@@ -244,13 +259,5 @@
 				</span>
 			</a>`;
 			}
-		});
-	
-	// Change the default member tab to projects
-	let regexMemberLink = /^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/;
-	Array.from(document.getElementsByTagName("a"))
-		.filter((a) => regexMemberLink.test(a.href))
-		.forEach((a) => {
-			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
 		});
 })();
