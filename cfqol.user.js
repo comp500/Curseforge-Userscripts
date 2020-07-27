@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.17
+// @version      0.18
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -183,6 +183,15 @@
 		.filter((a) => regexMemberLink.test(a.href))
 		.forEach((a) => {
 			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
+		});
+	
+	// Redirect linkout URLs
+	let regexLinkoutLink = /^https:\/\/www.curseforge.com\/linkout/;
+	linkList
+		.filter(a => regexLinkoutLink.test(a.href))
+		.forEach(a => {
+			let url = new URL(a.href);
+			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
 		});
 
 	// Readd download buttons for modpacks
