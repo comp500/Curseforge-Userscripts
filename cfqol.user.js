@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.15
+// @version      0.16
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -244,5 +244,13 @@
 				</span>
 			</a>`;
 			}
+		});
+	
+	// Change the default member tab to projects
+	let regexMemberLink = /^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/;
+	Array.from(document.getElementsByTagName("a"))
+		.filter((a) => regexMemberLink.test(a.href))
+		.forEach((a) => {
+			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
 		});
 })();
