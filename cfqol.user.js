@@ -156,43 +156,40 @@
 	}
 	
 	/**
-	 * Link redirections TODO: refactor
+	 * Link redirections
 	 */
 
 	const linkList = Array.from(document.getElementsByTagName("a"));
+	const regexDownloadLink = /^https:\/\/www.curseforge.com\/.*\/download\/\d+$/;
 
-	// Better method for skipping, if links contain file ID already
-	let regexDownloadLink = /^https:\/\/www.curseforge.com\/.*\/download\/\d+$/;
-	linkList
-		.filter((a) => regexDownloadLink.test(a.href))
-		.forEach((a) => {
+	const redirections = [
+		// Better method for skipping, if links contain file ID already
+		[regexDownloadLink, a => {
 			a.href = a.href + "/file";
-		});
-
-	// Change the default Minecraft tab (from other links) to /minecraft/mc-mods
-	let regexBrowse = /^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/;
-	linkList
-		.filter((a) => regexBrowse.test(a.href))
-		.forEach((a) => {
+		}],
+		// Change the default Minecraft tab (from other links) to /minecraft/mc-mods
+		[/^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/, a => {
 			a.href = "https://www.curseforge.com/minecraft/mc-mods";
-		});
-	
-	// Change the default member tab to projects
-	let regexMemberLink = /^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/;
-	linkList
-		.filter((a) => regexMemberLink.test(a.href))
-		.forEach((a) => {
+		}],
+		// Change the default member tab to projects
+		[/^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/, a => {
 			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
-		});
-	
-	// Redirect linkout URLs
-	let regexLinkoutLink = /^https:\/\/www.curseforge.com\/linkout/;
-	linkList
-		.filter(a => regexLinkoutLink.test(a.href))
-		.forEach(a => {
+		}],
+		// Redirect linkout URLs
+		[/^https:\/\/www.curseforge.com\/linkout/, a => {
 			let url = new URL(a.href);
 			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
-		});
+		}]
+	];
+	
+	for (let link of linkList) {
+		for (let redir of redirections) {
+			if (redir[0].test(link.href)) {
+				redir[1](link);
+				break;
+			}
+		}
+	}
 
 	/**
 	 * Readd download buttons for modpacks
