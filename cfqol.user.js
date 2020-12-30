@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.18
+// @version      0.19
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
