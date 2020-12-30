@@ -67,7 +67,7 @@
 	}
 
 	// Hide useless links, to save space
-	let uselessLinks = ["Minecraft Forums"];
+	let uselessLinks = ["Minecraft Forums", "Get Desktop"];
 	Array.from(document.querySelectorAll(".top-nav__nav-link"))
 		.filter((n) => uselessLinks.includes(n.innerText))
 		.forEach((n) => n.parentNode.removeChild(n));
@@ -156,7 +156,7 @@
 	}
 	
 	/**
-	 * Link redirections
+	 * Link redirections TODO: refactor
 	 */
 
 	const linkList = Array.from(document.getElementsByTagName("a"));
@@ -169,7 +169,7 @@
 			a.href = a.href + "/file";
 		});
 
-	// Change the Browse link and the default Minecraft tab (from other links) to /minecraft/mc-mods
+	// Change the default Minecraft tab (from other links) to /minecraft/mc-mods
 	let regexBrowse = /^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/;
 	linkList
 		.filter((a) => regexBrowse.test(a.href))
@@ -194,8 +194,37 @@
 			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
 		});
 
-	// Readd download buttons for modpacks
-	Array.from(document.querySelectorAll("a.button"))
+	/**
+	 * Readd download buttons for modpacks
+	 */
+
+	// All Files list
+	Array.from(document.querySelectorAll("table.listing a.button"))
+		.filter(l => l.pathname.startsWith("/minecraft/modpacks") && l.href.endsWith("?client=y"))
+		.map(link => {
+			let newHref = link.href.slice(0, -9);
+			if (regexDownloadLink.test(newHref)) {
+				newHref = newHref + "/file";
+			}
+
+			let newLink = link.cloneNode(true);
+			newLink.href = newHref;
+			newLink.classList.add("button--icon-only");
+			newLink.classList.add("mr-2");
+
+			newLink.innerHTML = `<span class="button__text">
+				<svg class="icon icon-fixed-width icon-margin" viewBox="0 0 20 20" width="18" height="18">
+					<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
+				</svg>
+			</span>`;
+
+			if (link.parentNode != null) {
+				link.parentNode.insertBefore(newLink, link);
+			}
+		});
+	
+	// Main File button, Page header button
+	Array.from(document.querySelectorAll("article a.button, header a.button"))
 		.filter((l) => l.pathname.startsWith("/minecraft/modpacks") && l.href.endsWith("?client=y"))
 		.map((link) => {
 			let newHref = link.href.slice(0, -9);
@@ -203,52 +232,23 @@
 				newHref = newHref + "/file";
 			}
 
-			if (link.classList.contains("button--icon-only")) {
-				// All Files list
-
-				let newLink = link.cloneNode(true);
-				newLink.href = newHref;
-				newLink.classList.add("button--hollow");
-				newLink.classList.add("mr-2");
-
-				let icon = newLink.querySelector(".icon");
-				if (icon != null) {
-					icon.parentNode.innerHTML = `<svg class="icon icon-fixed-width icon-margin" viewBox="0 0 20 20" width="18" height="18">
-					<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
-				</svg>`;
-				}
-				if (link.parentNode != null) {
-					link.parentNode.insertBefore(newLink, link);
-				}
-			} else if (link.querySelector(".button__text") != null) {
-				// Full text buttons
-
-				let newButton = link.parentNode.cloneNode(true);
-				// "Main file" buttons have ml-2 on the right button, while the rest have px-1 on both
-				if (link.parentNode.classList == null || !link.parentNode.classList.contains("px-1")) {
-					link.parentNode.classList.add("ml-2");
-				}
-				let newLink = newButton.querySelector("a.button");
-				newLink.classList.add("button--hollow");
-				newLink.href = newHref;
-
-				// Buttons at the top of the page have mr-1 on the install icon, and no icon on the Download button
-				let svgEl = newLink.querySelector("svg.mr-1");
-				if (svgEl == null) {
-					newLink.innerHTML = `<span class="button__text">
-					<svg class="icon icon-margin" viewBox="0 0 20 20" width="18" height="18">
-						<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
-					</svg> Download
-				</span>`;
-				} else {
-					svgEl.parentNode.removeChild(svgEl);
-					let newText = newLink.querySelector(".button__text");
-					if (newText != null) {
-						newText.innerText = "Download";
-					}
-				}
-				link.parentNode.parentNode.insertBefore(newButton, link.parentNode);
+			if (link.parentNode.parentNode.childElementCount >= 2) {
+				// For some reason, direct file pages now have it, but not the main files page?
+				return;
 			}
+
+			let newButton = link.parentNode.cloneNode(true);
+			newButton.classList.remove("ml-2");
+			let newLink = newButton.querySelector("a.button");
+			newLink.classList.add("button--hollow");
+			newLink.href = newHref;
+
+			newLink.innerHTML = `<span class="button__text">
+				<svg class="icon icon-margin" viewBox="0 0 20 20" width="18" height="18">
+					<use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Action/Download.svg#Action/Download"></use>
+				</svg> Download
+			</span>`;
+			link.parentNode.parentNode.insertBefore(newButton, link.parentNode);
 		});
 
 	// Minecraft version-specific files list

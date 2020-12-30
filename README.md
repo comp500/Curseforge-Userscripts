@@ -33,7 +33,7 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 - Adds pagination for dependency lists to the bottom of the page, so you don't have to scroll up!
 
 	![Pagination](images/pagination.png)
-- Changes the default action of the "Browse" link (in the top navigation bar) and the Minecraft logo on the homepage to the Mods tab of Minecraft
+- Changes the default action of the Minecraft logo on the homepage and the games list to the Mods tab of Minecraft
 
 	![Mods tab](images/modstab.png)
 - Automatically follows the 5 second download redirect for you, so you don't have to wait. Works best with version-specific download buttons.
