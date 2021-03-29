@@ -24,14 +24,14 @@
 	let styleSheet = Array.from(document.styleSheets).find((s) => /\/Content\/([\d\-]+)\//.test(s.href));
 	let assetsPath = styleSheet == null ? "2-0-7179-35052" : /\/Content\/([\d\-]+)\//.exec(styleSheet.href)[1];
 	searchBoxContainer.innerHTML = `<form action="/minecraft/mc-mods/search" method="get" novalidate="novalidate" autocomplete="false" style="width:100%">
-    <div class="flex flex-col h-full justify-between">
-         <div class="input input--icon" style="color: #000">
-            <i class="search textgray-900 flex items-center justify-center">
-                <svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
-            </i>
-            <input type="text" name="search" id="cfqolTopbarSearch" placeholder="Search Mods">
-        </div>
-    </div></form>`;
+	<div class="flex flex-col h-full justify-between">
+		 <div class="input input--icon" style="color: #000">
+			<i class="search textgray-900 flex items-center justify-center">
+				<svg class="icon" viewBox="0 0 20 20" width="16" height="16"><use xlink:href="/Content/${assetsPath}/Skins/CurseForge/images/twitch/Object/Search.svg#Object/Search"></use></svg>
+			</i>
+			<input type="text" name="search" id="cfqolTopbarSearch" placeholder="Search Mods">
+		</div>
+	</div></form>`;
 	let insertLocation = document.querySelector(".curseforge-header .ml-auto > div");
 	if (insertLocation != null && insertLocation.firstChild != null) {
 		// @Inject(method = "the navbar", at = @At("HEAD"))
@@ -91,10 +91,10 @@
 		modAllFiles.innerHTML = `<a href="/minecraft/mc-mods/${modSlug}/files/all" class="text-${
 			isAllFilesPage ? "primary" : "gray"
 		}-500 hover:no-underline">
-            <span class="b-list-label">
-                All Files
-            </span>
-        </a>`;
+			<span class="b-list-label">
+				All Files
+			</span>
+		</a>`;
 		filesTab.parentNode.insertBefore(modAllFiles, filesTab.nextSibling);
 	}
 

@@ -21,7 +21,6 @@
 (function() {
 	"use strict";
 
-
 	let storage = {};
 	if (localStorage.NoMoreARRMods != null) {
 		try {
@@ -36,7 +35,7 @@
 	let mCreatorDescRegex = /<div class="box p-4 pb-2 project-detail__content" data-user-content>[\w\W]*MCreator[\w\W]*?<\/div>/i;
 	let openSourceRegex = /Source<svg class="icon icon-offsite-nav" viewBox="0 0 20 20" width="20" height="20"><use xlink:href="[^"]+"\/><\/svg>/;
 	// haha nice try
-    let hahaSourceRegex = /<a href="https?:\/\/(www.)?mcreator.(net|com)\/?[^"\n]*"  ?class="text-gray-500 hover:no-underline" ?>\s*<span class="b-list-label">\s*Source/i;
+	let hahaSourceRegex = /<a href="https?:\/\/(www.)?mcreator.(net|com)\/?[^"\n]*"  ?class="text-gray-500 hover:no-underline" ?>\s*<span class="b-list-label">\s*Source/i;
 
 	let greaseMonkeyXHR = details => {
 		details.method = details.method ? details.method : "GET";
