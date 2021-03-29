@@ -123,6 +123,131 @@
 		filesTab.parentNode.insertBefore(packAllFiles, filesTab.nextSibling);
 	}
 
+	// Add an "All Files" tab for bukkit plugins
+	let pluginPathMatches = /\/minecraft\/bukkit-plugins\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	if (pluginPathMatches != null && pluginPathMatches.length == 2 && filesTab != null) {
+		let pluginSlug = pluginPathMatches[1];
+		let pluginAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/minecraft\/bukkit-plugins\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+			document.location.pathname
+		);
+		if (isAllFilesPage) {
+			pluginAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		} else {
+			pluginAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		}
+		pluginAllFiles.innerHTML = `<a href="/minecraft/bukkit-plugins/${pluginSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+		filesTab.parentNode.insertBefore(pluginAllFiles, filesTab.nextSibling);
+	}
+
+	// Add an "All Files" tab for customization
+	let customPathMatches = /\/minecraft\/customization\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	if (customPathMatches != null && customPathMatches.length == 2 && filesTab != null) {
+		let customSlug = customPathMatches[1];
+		let customAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/minecraft\/customization\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+			document.location.pathname
+		);
+		if (isAllFilesPage) {
+			customAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		} else {
+			customAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		}
+		customAllFiles.innerHTML = `<a href="/minecraft/customization/${customSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+		filesTab.parentNode.insertBefore(customAllFiles, filesTab.nextSibling);
+	}
+
+	// Add an "All Files" tab for addons
+	let addonPathMatches = /\/minecraft\/mc-addons\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	if (addonPathMatches != null && addonPathMatches.length == 2 && filesTab != null) {
+		let addonSlug = addonPathMatches[1];
+		let addonAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/minecraft\/mc-addons\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+			document.location.pathname
+		);
+		if (isAllFilesPage) {
+			addonAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		} else {
+			addonAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		}
+		addonAllFiles.innerHTML = `<a href="/minecraft/mc-addons/${addonSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+		filesTab.parentNode.insertBefore(addonAllFiles, filesTab.nextSibling);
+	}
+
+	// Add an "All Files" tab for resource packs
+	let respackPathMatches = /\/minecraft\/texture-packs\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	if (respackPathMatches != null && respackPathMatches.length == 2 && filesTab != null) {
+		let respackSlug = respackPathMatches[1];
+		let respackAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/minecraft\/texture-packs\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+			document.location.pathname
+		);
+		if (isAllFilesPage) {
+			respackAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		} else {
+			respackAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		}
+		respackAllFiles.innerHTML = `<a href="/minecraft/texture-packs/${respackSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+		filesTab.parentNode.insertBefore(respackAllFiles, filesTab.nextSibling);
+	}
+
+	// Add an "All Files" tab for worlds
+	let worldPathMatches = /\/minecraft\/worlds\/([a-z][\da-z\-_]{0,127})/.exec(document.location.pathname);
+	if (worldPathMatches != null && worldPathMatches.length == 2 && filesTab != null) {
+		let worldSlug = worldPathMatches[1];
+		let worldAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/minecraft\/worlds\/[a-z][\da-z\-_]{0,127}\/files\/all/.test(
+			document.location.pathname
+		);
+		if (isAllFilesPage) {
+			worldAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		} else {
+			worldAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+		}
+		worldAllFiles.innerHTML = `<a href="/minecraft/worlds/${worldSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+		  <span class="b-list-label">
+			  All Files
+		  </span>
+	  </a>`;
+		filesTab.parentNode.insertBefore(worldAllFiles, filesTab.nextSibling);
+	}
+
 	// Add pagination to the bottom of the page in dependency lists
 	let dependenciesPage = document.querySelector(".project-dependencies-page > div");
 	if (dependenciesPage != null) {
