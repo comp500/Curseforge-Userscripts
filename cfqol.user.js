@@ -73,33 +73,31 @@
 		.forEach((n) => n.parentNode.removeChild(n));
 
 	// Add an "All Files" tab for all curseforge projects
-	const projects = ["bukkit-plugins", "modpacks", "customization", "mc-addons", "mc-mods", "texture-packs", "worlds"];
-	for (var project of projects) {
-		let projectPathMatches = new RegExp(`/minecraft/${project}/([a-z][\\da-z-_]{0,127})`).exec(document.location.pathname);
-		let filesTab = document.getElementById("nav-files");
-		if (projectPathMatches != null && projectPathMatches.length == 2 && filesTab != null) {
-			let projectSlug = projectPathMatches[1];
-			let projectAllFiles = document.createElement("li");
-			let isAllFilesPage = new RegExp(`/minecraft/${project}/[a-z][\\da-z-_]{0,127}/files/all`).test(
-				document.location.pathname
-			);
-			if (isAllFilesPage) {
-				projectAllFiles.className =
-					"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-				filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-				filesTab.getElementsByTagName("a")[0].className = "text-gray-500 hover:no-underline";
-			} else {
-				projectAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
-			}
-			projectAllFiles.innerHTML = `<a href="/minecraft/${project}/${projectSlug}/files/all" class="text-${
-				isAllFilesPage ? "primary" : "gray"
-			}-500 hover:no-underline">
-				<span class="b-list-label">
-					All Files
-				</span>
-			</a>`;
-			filesTab.parentNode.insertBefore(projectAllFiles, filesTab.nextSibling);
+	let projectPathMatches = /^\/([\w-]+)\/([\w-]+)\/([a-z][\\da-z-_]{0,127})/.exec(document.location.pathname);
+	let filesTab = document.getElementById("nav-files");
+	if (projectPathMatches != null && projectPathMatches.length == 4 && filesTab != null) {
+		let gameName = projectPathMatches[1];
+		let projectCategory = projectPathMatches[2];
+		let projectSlug = projectPathMatches[3];
+
+		let projectAllFiles = document.createElement("li");
+		let isAllFilesPage = /\/files\/all$/.test(document.location.pathname);
+		if (isAllFilesPage) {
+			projectAllFiles.className =
+				"border-b-2 border-primary-500 b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
+			filesTab.getElementsByTagName("a")[0].className = "text-gray-500 hover:no-underline";
+		} else {
+			projectAllFiles.className = "b-list-item p-nav-item px-2 pb-1/10 -mb-1/10 text-gray-500";
 		}
+		projectAllFiles.innerHTML = `<a href="/${gameName}/${projectCategory}/${projectSlug}/files/all" class="text-${
+			isAllFilesPage ? "primary" : "gray"
+		}-500 hover:no-underline">
+			<span class="b-list-label">
+				All Files
+			</span>
+		</a>`;
+		filesTab.parentNode.insertBefore(projectAllFiles, filesTab.nextSibling);
 	}
 
 	// Add pagination to the bottom of the page in dependency lists
