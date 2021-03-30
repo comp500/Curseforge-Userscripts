@@ -16,9 +16,9 @@
 // ==/UserScript==
 
 (async function() {
-    'use strict';
+	'use strict';
 
-    let greaseMonkeyXHR = details => {
+	let greaseMonkeyXHR = details => {
 		details.method = details.method ? details.method : "GET";
 		details.anonymous = true;
 		details.responseType = details.responseType ? details.responseType : "arraybuffer";
