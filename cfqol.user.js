@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.20
+// @version      0.21
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -73,7 +73,7 @@
 		.forEach((n) => n.parentNode.removeChild(n));
 
 	// Add an "All Files" tab for all curseforge projects
-	let projectPathMatches = /^\/([\w-]+)\/([\w-]+)\/([a-z][\\da-z-_]{0,127})/.exec(document.location.pathname);
+	let projectPathMatches = /^\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})/.exec(document.location.pathname);
 	let filesTab = document.getElementById("nav-files");
 	if (projectPathMatches != null && projectPathMatches.length == 4 && filesTab != null) {
 		let gameName = projectPathMatches[1];
