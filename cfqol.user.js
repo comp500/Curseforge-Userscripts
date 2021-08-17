@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.21
+// @version      0.22
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -46,8 +46,6 @@
 
 			let navLinksContainer = document.querySelector(".top-nav__nav-link").parentNode;
 			navLinksContainer.style.transition = "opacity 0.4s, max-width 0.3s";
-			navLinksContainer.style.overflowX = "hidden";
-			searchBox.style.transition = "";
 			searchBox.addEventListener("focus", (e) => {
 				navLinksContainer.style.opacity = 0;
 				navLinksContainer.style.maxWidth = "0";
@@ -65,12 +63,6 @@
 			}
 		}
 	}
-
-	// Hide useless links, to save space
-	let uselessLinks = ["Minecraft Forums", "Get Desktop"];
-	Array.from(document.querySelectorAll(".top-nav__nav-link"))
-		.filter((n) => uselessLinks.includes(n.innerText))
-		.forEach((n) => n.parentNode.removeChild(n));
 
 	// Add an "All Files" tab for all curseforge projects
 	let projectPathMatches = /^\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})/.exec(document.location.pathname);
