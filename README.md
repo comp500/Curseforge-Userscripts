@@ -21,7 +21,7 @@ They can also be installed from [Greasy Fork](https://greasyfork.org/en/users/33
 This userscript fixes a few annoying problems with Curseforge. If you have any suggestions, please submit them as issues or [ping me on Discord](https://discord.mcmoddev.com/)!
 
 ### Features
-- Adds a search bar to the top navigation bar that searches mods (and removes the Minecraft Forums link to make space)
+- Adds a search bar to the top navigation bar that searches mods.
 
 	![Search bar](images/searchbar.png)
 - Readds modpack download buttons, because they removed them. Useful for people using alternative launchers.
