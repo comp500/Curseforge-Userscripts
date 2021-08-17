@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.22
+// @version      0.23
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -235,4 +235,18 @@
 			</a>`;
 			}
 		});
+	
+	// Sort file dependency lists
+	let sortNodeList = (list, sortBy) => {
+		let pairs = Array.from(list).map(el => [el, el.parentNode]);
+		pairs.sort((a, b) => sortBy(a[0], b[0]));
+		pairs.forEach(pair => pair[1].removeChild(pair[0]));
+		pairs.forEach(pair => pair[1].appendChild(pair[0]));
+	};
+
+	let relatedProjectsHeading = Array.from(document.querySelectorAll("section > h3")).find(heading => heading.innerText == "Related Projects");
+	if (relatedProjectsHeading != undefined) {
+		sortNodeList(relatedProjectsHeading.parentNode.querySelectorAll("section > div.flex > div"), (a, b) =>
+			a.querySelector("p.font-bold > a").innerText.localeCompare(b.querySelector("p.font-bold > a").innerText));
+	}
 })();
