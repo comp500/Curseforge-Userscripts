@@ -24,7 +24,7 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 - Adds a search bar to the top navigation bar that searches mods.
 
 	![Search bar](images/searchbar.png)
-- Readds modpack download buttons, because they removed them. Useful for people using alternative launchers.
+- Re-adds modpack download buttons, because they removed them. Useful for people using alternative launchers.
 
 	![Modpack download button](images/modpackdownload.png)
 - Adds a tab to mod and modpack pages that allows all the files to be viewed, rather than just the recent files - normally hidden behind a "View All" button
