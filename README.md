@@ -46,6 +46,7 @@ This userscript fixes a few annoying problems with Curseforge. If you have any s
 
 	![Projects tab](images/defaultusertab.png)
 - Sorts the "Related Projects" list on the file details page.
+- Changes the default Dependency Type in the Relations tab to "Required Dependency"
 
 ## Redirect Old Links
 When Curseforge redesigned their site, they moved mods from minecraft.curseforge.com to www.curseforge.com/minecraft. It doesn't seem to redirect the old links to the new ones any more, so this userscript will do it for you. For some reason the new site also doesn't support viewing mods by Addon ID anymore, so this script will resolve the IDs if they exist in the old links.

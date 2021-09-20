@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.23
+// @version      0.24
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -148,6 +148,10 @@
 		[/^https:\/\/www.curseforge.com\/linkout/, a => {
 			let url = new URL(a.href);
 			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
+		}],
+		// Change the default dependency type to "Required Dependency"
+		[/^https:\/\/www.curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
+			a.href = a.href + "?filter-related-dependencies=3";
 		}]
 	];
 	
