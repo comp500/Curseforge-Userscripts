@@ -53,7 +53,7 @@
 		// Match slug IDs
 		matches = location.href.match(/https:\/\/minecraft.curseforge.com\/mc-mods\/([a-z][\da-z\-_]{1,127})\/?$/);
 		if (matches != null && matches[1] != null) {
-			location.href = "https://www.curseforge.com/minecraft/mc-mods/" + matches[1];
+			location.href = "https://legacy.curseforge.com/minecraft/mc-mods/" + matches[1];
 		}
 	}
 })();

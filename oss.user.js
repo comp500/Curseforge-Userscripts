@@ -6,6 +6,8 @@
 // @namespace    https://infra.link/
 // @match        https://www.curseforge.com/minecraft/*
 // @match        https://www.curseforge.com/Minecraft/*
+// @match        https://legacy.curseforge.com/minecraft/*
+// @match        https://legacy.curseforge.com/Minecraft/*
 // @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/oss.user.js
 // @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/oss.user.js
 // @homepageURL  https://github.com/comp500/Curseforge-Userscripts/
@@ -52,7 +54,11 @@
 		Array.from(document.querySelectorAll(".project-listing-row")).map(async row => {
 			let link = Array.from(row.getElementsByTagName("a")).find(a => modRegex.test(a.href));
 			if (link != undefined) {
-				let stored = link.href.replace("https://www.curseforge.com/minecraft/mc-mods/", "").replace("https://www.curseforge.com/Minecraft/mc-mods/", "");
+				let stored = (link.href
+					.replace("https://legacy.curseforge.com/minecraft/mc-mods/", "")
+					.replace("https://legacy.curseforge.com/Minecraft/mc-mods/", "")
+					.replace("https://www.curseforge.com/minecraft/mc-mods/", "")
+					.replace("https://www.curseforge.com/Minecraft/mc-mods/", ""));
 				if (storage[stored] == "arr") {
 					row.parentNode.removeChild(row);
 					return;
