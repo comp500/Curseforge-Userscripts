@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Block mod button
-// @version      0.1
+// @version      0.2
 // @description  Hides selected mods from Curseforge
 // @author       comp500
 // @namespace    https://infra.link/

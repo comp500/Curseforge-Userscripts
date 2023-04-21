@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         No More ARR Mods
-// @version      0.2
+// @version      0.3
 // @description  you weren't gonna use them anyway
 // @author       comp500
 // @namespace    https://infra.link/

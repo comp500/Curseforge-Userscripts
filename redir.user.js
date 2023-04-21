@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Redirect Old Links
-// @version      0.1
+// @version      0.2
 // @description  No more "Module Disabled"!
 // @author       comp500
 // @namespace    https://infra.link/

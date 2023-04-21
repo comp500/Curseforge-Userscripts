@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         No More MCreator Mods
-// @version      0.9
+// @version      0.10
 // @description  you weren't gonna use them anyway
 // @author       comp500
 // @namespace    https://infra.link/
