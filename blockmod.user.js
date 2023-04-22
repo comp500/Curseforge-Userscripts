@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         Block mod button
-// @version      0.1
+// @version      0.2
 // @description  Hides selected mods from Curseforge
 // @author       comp500
 // @namespace    https://infra.link/
 // @match        https://www.curseforge.com/minecraft/*
 // @match        https://www.curseforge.com/Minecraft/*
+// @match        https://legacy.curseforge.com/minecraft/*
+// @match        https://legacy.curseforge.com/Minecraft/*
 // @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/blockmod.user.js
 // @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/blockmod.user.js
 // @homepageURL  https://github.com/comp500/Curseforge-Userscripts/
@@ -41,7 +43,11 @@
 
 	Array.from(document.querySelectorAll(".project-listing-row")).map(row => {
 		for (let link of Array.from(row.getElementsByTagName("a")).filter(a => modRegex.test(a.href))) {
-			let stored = link.href.replace("https://www.curseforge.com/minecraft/mc-mods/", "").replace("https://www.curseforge.com/Minecraft/mc-mods/", "");
+			let stored = (link.href
+				.replace("https://legacy.curseforge.com/minecraft/mc-mods/", "")
+				.replace("https://legacy.curseforge.com/Minecraft/mc-mods/", "")
+				.replace("https://www.curseforge.com/minecraft/mc-mods/", "")
+				.replace("https://www.curseforge.com/Minecraft/mc-mods/", ""));
 			if (storage[stored] == "block") {
 				if (row.parentNode != null) {
 					row.parentNode.removeChild(row);

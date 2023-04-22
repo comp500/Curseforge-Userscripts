@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.24
+// @version      0.25
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
 // @match        https://www.curseforge.com/*
+// @match        https://legacy.curseforge.com/*
 // @updateURL    https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
 // @downloadURL  https://github.com/comp500/Curseforge-Userscripts/raw/master/cfqol.user.js
 // @homepageURL  https://github.com/comp500/Curseforge-Userscripts/
@@ -129,7 +130,7 @@
 	 */
 
 	const linkList = Array.from(document.getElementsByTagName("a"));
-	const regexDownloadLink = /^https:\/\/www.curseforge.com\/.*\/download\/\d+$/;
+	const regexDownloadLink = /^https:\/\/(www|legacy).curseforge.com\/.*\/download\/\d+$/;
 
 	const redirections = [
 		// Better method for skipping, if links contain file ID already
@@ -137,20 +138,20 @@
 			a.href = a.href + "/file";
 		}],
 		// Change the default Minecraft tab (from other links) to /minecraft/mc-mods
-		[/^http:\/\/bit.ly\/2Lzpfsl|https:\/\/www.curseforge.com\/minecraft\/?$/, a => {
-			a.href = "https://www.curseforge.com/minecraft/mc-mods";
+		[/^http:\/\/bit.ly\/2Lzpfsl|https:\/\/(www|legacy).curseforge.com\/minecraft\/?$/, a => {
+			a.path = "/minecraft/mc-mods";
 		}],
 		// Change the default member tab to projects
-		[/^https:\/\/www.curseforge.com\/members\/[^\/]+\/?$/, a => {
+		[/^https:\/\/(www|legacy).curseforge.com\/members\/[^\/]+\/?$/, a => {
 			a.href = a.href + (a.href.endsWith("/") ? "" : "/") + "projects";
 		}],
 		// Redirect linkout URLs
-		[/^https:\/\/www.curseforge.com\/linkout/, a => {
+		[/^https:\/\/(www|legacy).curseforge.com\/linkout/, a => {
 			let url = new URL(a.href);
 			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
 		}],
 		// Change the default dependency type to "Required Dependency"
-		[/^https:\/\/www.curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
+		[/^https:\/\/(www|legacy).curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
 			a.href = a.href + "?filter-related-dependencies=3";
 		}]
 	];
