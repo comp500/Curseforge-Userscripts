@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Curseforge QOL Fixes
-// @version      0.25
+// @version      0.26
 // @description  Various Quality of Life improvements to the Curseforge website
 // @author       comp500
 // @namespace    https://infra.link/
@@ -153,6 +153,10 @@
 		// Change the default dependency type to "Required Dependency"
 		[/^https:\/\/(www|legacy).curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
 			a.href = a.href + "?filter-related-dependencies=3";
+		}],
+		// Change the default dependent type to "Required Dependency"
+		[/^https:\/\/(www|legacy).curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependents\/?$/, a => {
+			a.href = a.href + "?filter-related-dependents=3";
 		}]
 	];
 	
