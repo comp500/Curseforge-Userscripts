@@ -150,6 +150,10 @@
 			let url = new URL(a.href);
 			a.href = decodeURIComponent(url.searchParams.get("remoteUrl"));
 		}],
+		// Change the default dependency type to "Include" for Minecraft modpacks
+		[/^https:\/\/(www|legacy).curseforge.com\/minecraft\/modpacks\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
+			a.href = a.href + "?filter-related-dependencies=6";
+		}],
 		// Change the default dependency type to "Required Dependency"
 		[/^https:\/\/(www|legacy).curseforge.com\/([\w-]+)\/([\w-]+)\/([a-z][\da-z-_]{0,127})\/relations\/dependencies\/?$/, a => {
 			a.href = a.href + "?filter-related-dependencies=3";
