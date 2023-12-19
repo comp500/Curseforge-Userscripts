@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Redirect Old Links
-// @version      0.2
+// @version      0.3
 // @description  No more "Module Disabled"!
 // @author       comp500
 // @namespace    https://infra.link/
@@ -32,28 +32,12 @@
 	// Match project IDs
 	let matches = location.href.match(/https:\/\/minecraft.curseforge.com\/mc-mods\/(\d+)/);
 	if (matches != null && matches[1] != null) {
-		let res = await greaseMonkeyXHR({
-			url: "https://addons-ecs.forgesvc.net/api/v2/addon/" + matches[1],
-			method: "GET",
-			responseType: "json",
-			headers: {
-				Accept: "application/json"
-			}
-		});
-		if (res.status != 200) {
-			console.error("RedirectOldLinks: failed to get addon info: " + res.status + " " + res.statusText);
-			return;
-		}
-		if (res.response == null) {
-			console.error("RedirectOldLinks: failed to get addon info: null response");
-			return;
-		}
-		location.href = res.response.websiteUrl;
+		location.href = "https://www.curseforge.com/projects/" + matches[1];
 	} else {
 		// Match slug IDs
 		matches = location.href.match(/https:\/\/minecraft.curseforge.com\/mc-mods\/([a-z][\da-z\-_]{1,127})\/?$/);
 		if (matches != null && matches[1] != null) {
-			location.href = "https://legacy.curseforge.com/minecraft/mc-mods/" + matches[1];
+			location.href = "https://www.curseforge.com/minecraft/mc-mods/" + matches[1];
 		}
 	}
 })();
